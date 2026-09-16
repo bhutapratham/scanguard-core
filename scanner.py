@@ -1,3 +1,4 @@
+import sys
 import requests
 
 SECURITY_HEADERS = {
@@ -19,7 +20,7 @@ def scan_url(url: str):
         headers = response.headers
     except requests.exceptions.RequestException as e:
         print(f"Error reaching {url}: {e}")
-        return
+        sys.exit(1)
 
     score = 0
     total = len(SECURITY_HEADERS)
@@ -56,6 +57,9 @@ def scan_url(url: str):
         print(f"  [FAIL] {h} -> {desc}")
 
 if __name__ == "__main__":
-    target = input("Enter website URL to scan (e.g., github.com): ").strip()
+    if len(sys.argv) > 1:
+        target = sys.argv.strip()
+    else:
+        target = input("Enter website URL to scan (e.g., github.com): ").strip()
     if target:
         scan_url(target)
