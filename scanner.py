@@ -58,7 +58,7 @@ def scan_url(url: str):
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
-        target = sys.argv.strip()
+        target = sys.argv[-1].strip()
     else:
         target = input("Enter website URL to scan (e.g., github.com): ").strip()
     if target:
